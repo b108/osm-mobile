@@ -1,3 +1,7 @@
 #map {
     height: 300px;
 }
+
+#map-page .ui-content {
+    padding: 0;
+}
