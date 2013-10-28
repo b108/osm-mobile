@@ -10,6 +10,27 @@
     display: none !important;
 }
 
-.has-fullscreen-api .goFullScreen {
-    display: none !important;
+.has-fullscreen .goFullScreen {
+    display: inline-block !important;
+}
+
+html, body {
+    height: 100%;
+}
+
+#map-page {
+    position: relative;
+    height: 100%;
+}
+
+#map-page .ui-content {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 45px;
+}
+
+#map-page .ui-content #map {
+    height: 100%;
 }

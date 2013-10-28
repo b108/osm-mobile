@@ -2,9 +2,9 @@ define(['Backbone', 'jQuery', 'Leaflet', 'models/mapState'], function(Backbone, 
     return Backbone.View.extend({
         model: mapState,
         initialize: function() {
-            var map_height = $('#map-page').height() - $('#map-page > .ui-header').height() - 2;
+            //var map_height = $('#map-page').height() - $('#map-page > .ui-header').height() - 2;
 
-            $('#map').css('height', map_height + 'px');
+            //$('#map').css('height', map_height + 'px');
 
             var state = this.model;
 

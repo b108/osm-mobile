@@ -1,8 +1,17 @@
 define([], function() {
-    return function() {
-        var element = document.createElement('div');
-
-        return (element.requestFullscreen || element.webkitrequestFullscreen || element.mozRequestFullscreen);
-    }
+    return {
+        hasFullScreenAPI: function(element) {
+            return !!(element.requestFullscreen || element.webkitRequestFullscreen || element.mozRequestFullScreen);
+        },
+        fullScreen: function(element) {
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.webkitRequestFullscreen ) {
+                element.webkitRequestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            }
+        }
+    };
 });
 
