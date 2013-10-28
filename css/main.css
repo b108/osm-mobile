@@ -5,3 +5,11 @@
 #map-page .ui-content {
     padding: 0;
 }
+
+.goFullScreen {
+    display: none !important;
+}
+
+.has-fullscreen-api .goFullScreen {
+    display: none !important;
+}
