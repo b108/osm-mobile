@@ -33,6 +33,8 @@ define(['Backbone', 'jQuery', 'Leaflet', 'models/mapState'], function(Backbone, 
                 }
             });
 
+            map.locate({watch: true, setView: true});
+
             L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             }).addTo( map );
