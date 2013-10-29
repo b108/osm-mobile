@@ -11,7 +11,7 @@ define(['Backbone', 'jQuery', 'detect/fullScreen'], function(Backbone, $, detect
             }
         },
         goFullScreenClickHandler: function(event) {
-            detect.fullScreen( $('body')[0] );
+            detect.fullScreen( $('html')[0] );
             return false;
         }
     });
