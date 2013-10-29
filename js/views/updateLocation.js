@@ -8,7 +8,6 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem', 'func
 
             if (navigator.geolocation) {
                 navigator.geolocation.watchPosition(function(position) {
-                    $('h3').html('#a' + (i++));
                     setTimeout(function() {
                         ths.model.set({
                             lon: position.coords.longitude, lat: position.coords.latitude
@@ -17,13 +16,8 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem', 'func
                 }, function() {}, {enableHighAccuracy: true, maximumAge: 0});
             }
 
-            mapState.on('change', function() {
-                $('h3').html('#map' + mapState.get('lon') + ' ' + mapState.get('lat'));
-            });
-
             this.model.on('change', function() {
                 var distance = distanceMeters(ths.model.toJSON(), mapState.toJSON());
-                //$('h3').html(distance + '#s' + (i++));
                 if (distance > 20) {
                     var newPosition = ths.model.toJSON();
                     newPosition.z = 18;
