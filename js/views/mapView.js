@@ -1,4 +1,4 @@
-define(['Backbone', 'jQuery', 'Leaflet', 'models/mapStateItem', 'EventBroker'], function(Backbone, $, L, mapState, EventBroker) {
+define(['Backbone', 'jQuery', 'Leaflet', 'models/mapStateItem', 'EventBroker', 'models/leafletMapObject'], function(Backbone, $, L, mapState, EventBroker, leafletMapObject) {
     return Backbone.View.extend({
         model: mapState,
         interests: {
@@ -15,6 +15,8 @@ define(['Backbone', 'jQuery', 'Leaflet', 'models/mapStateItem', 'EventBroker'], 
                 center: [state.get('lat'), state.get('lon')], // Leningrad
                 zoom: state.get('z')
             });
+
+            leafletMapObject.setMap(map);
 
             map.on('moveend', function() {
                 if (state._update_from_change) return;

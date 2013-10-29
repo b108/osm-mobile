@@ -1,6 +1,6 @@
-define(['Backbone', 'jQuery', 'EventBroker', 'models/mapState'], function(Backbone, $, EventBroker, MapState) {
+define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem'], function(Backbone, $, EventBroker, currentPosition) {
     return Backbone.View.extend({
-        model: new MapState(),
+        model: currentPosition,
         initialize: function() {
             var ths = this;
 
@@ -15,7 +15,9 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/mapState'], function(Backbo
 
                 var startMapUpdate = function() {
                     var setCenter = function() {
-                        EventBroker.trigger('map:setCenter', ths.model.toJSON());
+                        var newPosition = ths.model.toJSON();
+                        newPosition.z = 18;
+                        EventBroker.trigger('map:setCenter', newPosition);
                     };
 
                     setInterval(setCenter, 10000);
