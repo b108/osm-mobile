@@ -8,6 +8,7 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem', 'func
 
             if (navigator.geolocation) {
                 navigator.geolocation.watchPosition(function(position) {
+                    $('h3').html('#a' + (i++));
                     setTimeout(function() {
                         ths.model.set({
                             lon: position.coords.longitude, lat: position.coords.latitude
@@ -18,7 +19,7 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem', 'func
 
             this.model.on('change', function() {
                 var distance = distanceMeters(ths.model.toJSON(), mapState.toJSON());
-                $('h3').html(distance + '#s' + (i++));
+                //$('h3').html(distance + '#s' + (i++));
                 if (distance > 20) {
                     var newPosition = ths.model.toJSON();
                     newPosition.z = 18;
