@@ -45,6 +45,12 @@ define(['Backbone', 'jQuery', 'Leaflet', 'models/mapStateItem', 'EventBroker', '
                 }
             });
 
+            $('#map-page').bind('pageshow', function() {
+                setTimeout(function() {
+                    map.invalidateSize();
+                }, 0);
+            });
+
             //map.locate({watch: true, setView: true});
 
             EventBroker.register(this);
@@ -54,10 +60,6 @@ define(['Backbone', 'jQuery', 'Leaflet', 'models/mapStateItem', 'EventBroker', '
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             }).addTo( map );
             */
-
-            L.tileLayer('http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo( map );
 
             L.control.scale().addTo(map);
         },
