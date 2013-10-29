@@ -1,6 +1,4 @@
 define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem', 'functions/distanceMeters', 'models/mapStateItem'], function(Backbone, $, EventBroker, currentPosition, distanceMeters, mapState) {
-    var i = 0;
-
     return Backbone.View.extend({
         model: currentPosition,
         initialize: function() {
