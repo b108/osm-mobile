@@ -8,9 +8,11 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem', 'func
 
             if (navigator.geolocation) {
                 navigator.geolocation.watchPosition(function(position) {
-                    ths.model.set({
-                        lon: position.coords.longitude, lat: position.coords.latitude
-                    });
+                    setTimeout(function() {
+                        ths.model.set({
+                            lon: position.coords.longitude, lat: position.coords.latitude
+                        });
+                    }, 0);
                 });
             }
 
