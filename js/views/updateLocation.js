@@ -1,12 +1,27 @@
-define(['Backbone', 'jQuery', 'EventBroker'], function(Backbone, $, EventBroker) {
+define(['Backbone', 'jQuery', 'EventBroker', 'models/mapState'], function(Backbone, $, EventBroker, MapState) {
     return Backbone.View.extend({
+        model: new MapState(),
         initialize: function() {
+            var ths = this;
+
             if (navigator.geolocation) {
-                setInterval(function() {
-                    navigator.geolocation.getCurrentPosition(function(position) {
-                        EventBroker.trigger('map:setCenter', {lon: position.coords.longitude, lat: position.coords.latitude, z: 18});
+                navigator.geolocation.watchPosition(function(position) {
+                    ths.model.set({
+                        lon: position.coords.longitude, lat: position.coords.latitude, z: 18
                     });
-                }, 10000);
+
+                    startMapUpdate();
+                });
+
+                var startMapUpdate = function() {
+                    var setCenter = function() {
+                        EventBroker.trigger('map:setCenter', ths.model.toJSON());
+                    };
+
+                    setInterval(setCenter, 10000);
+
+                    startMapUpdate = function() {};
+                };
             }
         }
     });

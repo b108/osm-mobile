@@ -1,5 +1,5 @@
 define(['Backbone'], function(Backbone) {
-    return new(Backbone.Model.extend({
+    return Backbone.Model.extend({
             defaults: {
                 // Leningrad
                 lat: 59.95,
@@ -25,5 +25,5 @@ define(['Backbone'], function(Backbone) {
                     storage.z = this.get('z');
                 }
             }
-    }));
+    });
 });

@@ -1,4 +1,4 @@
-define(['Backbone', 'jQuery', 'Leaflet', 'models/mapState', 'EventBroker'], function(Backbone, $, L, mapState, EventBroker) {
+define(['Backbone', 'jQuery', 'Leaflet', 'models/mapStateItem', 'EventBroker'], function(Backbone, $, L, mapState, EventBroker) {
     return Backbone.View.extend({
         model: mapState,
         interests: {
