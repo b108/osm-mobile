@@ -10,6 +10,9 @@ define(['Backbone', 'jQuery', 'Leaflet', 'models/mapStateItem', 'EventBroker', '
             //$('#map').css('height', map_height + 'px');
 
             var state = this.model;
+            state.fetch();
+
+            state.on('change', state.save, state);
 
             var map = L.map('map', {
                 center: [state.get('lat'), state.get('lon')], // Leningrad
@@ -63,4 +66,3 @@ define(['Backbone', 'jQuery', 'Leaflet', 'models/mapStateItem', 'EventBroker', '
         }
     });
 });
-
