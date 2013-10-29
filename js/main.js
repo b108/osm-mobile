@@ -9,7 +9,8 @@ require.config({
         Backbone:'libs/backbone',
         Underscore: "libs/underscore",
         EventBroker: "libs/event-broker-debug",
-        BackboneEventBroker: "libs/backbone-eventbroker"
+        BackboneEventBroker: "libs/backbone-eventbroker",
+        templates: "../templates"
     },
     shim: {
         'Underscore':{

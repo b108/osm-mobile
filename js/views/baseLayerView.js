@@ -9,4 +9,3 @@ define(['Backbone', 'Leaflet', 'models/leafletMapObject'], function(Backbone, L,
         }
     });
 });
-
