@@ -18,7 +18,7 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem', 'func
 
             this.model.on('change', function() {
                 var distance = distanceMeters(ths.model.toJSON(), mapState.toJSON());
-                $('h3').html(distance + '#' + (i++));
+                $('h3').html(distance + '#s' + (i++));
                 if (distance > 20) {
                     var newPosition = ths.model.toJSON();
                     newPosition.z = 18;
