@@ -7,7 +7,9 @@ require.config({
         jQuery:"jQuery.from.window",
         Leaflet:"Leaflet.from.window",
         Backbone:'libs/backbone',
-        Underscore: "libs/underscore"
+        Underscore: "libs/underscore",
+        EventBroker: "libs/event-broker-debug",
+        BackboneEventBroker: "libs/backbone-eventbroker"
     },
     shim: {
         'Underscore':{

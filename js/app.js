@@ -1,7 +1,8 @@
-define(['views/mapView', 'views/fullScreenView'], function(MapView, FullScreenView) {
+define(['views/mapView', 'views/fullScreenView', 'views/updateLocation'], function(MapView, FullScreenView, UpdateLocationView) {
     var initialize = function() {
         new FullScreenView();
         new MapView();
+        new UpdateLocationView();
     };
 
     return {

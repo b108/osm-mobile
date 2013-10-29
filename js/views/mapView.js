@@ -1,6 +1,9 @@
-define(['Backbone', 'jQuery', 'Leaflet', 'models/mapState'], function(Backbone, $, L, mapState) {
+define(['Backbone', 'jQuery', 'Leaflet', 'models/mapState', 'EventBroker'], function(Backbone, $, L, mapState, EventBroker) {
     return Backbone.View.extend({
         model: mapState,
+        interests: {
+            'map:setCenter': 'mapSetCenterSignalHandler'
+        },
         initialize: function() {
             //var map_height = $('#map-page').height() - $('#map-page > .ui-header').height() - 2;
 
@@ -33,13 +36,18 @@ define(['Backbone', 'jQuery', 'Leaflet', 'models/mapState'], function(Backbone, 
                 }
             });
 
-            map.locate({watch: true, setView: true});
+            //map.locate({watch: true, setView: true});
+
+            EventBroker.register(this);
 
             L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             }).addTo( map );
 
             L.control.scale().addTo(map);
+        },
+        mapSetCenterSignalHandler: function(position) {
+            this.model.set(position);
         }
     });
 });
