@@ -1,4 +1,6 @@
 define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem', 'functions/distanceMeters', 'models/mapStateItem'], function(Backbone, $, EventBroker, currentPosition, distanceMeters, mapState) {
+    var i = 0;
+
     return Backbone.View.extend({
         model: currentPosition,
         initialize: function() {
@@ -9,16 +11,18 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem', 'func
                     ths.model.set({
                         lon: position.coords.longitude, lat: position.coords.latitude
                     });
-
-                    var distance = distanceMeters(ths.model.toJSON(), mapState.toJSON());
-                    $('h3').html(distance);
-                    if (distance > 20) {
-                        var newPosition = ths.model.toJSON();
-                        newPosition.z = 18;
-                        EventBroker.trigger('map:setCenter', newPosition);
-                    }
                 });
             }
+
+            this.model.on('change', function() {
+                var distance = distanceMeters(ths.model.toJSON(), mapState.toJSON());
+                $('h3').html(distance + '#' + (i++));
+                if (distance > 20) {
+                    var newPosition = ths.model.toJSON();
+                    newPosition.z = 18;
+                    EventBroker.trigger('map:setCenter', newPosition);
+                }
+            });
         }
     });
 });
