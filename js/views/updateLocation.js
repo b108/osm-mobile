@@ -17,6 +17,10 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem', 'func
                 }, function() {}, {enableHighAccuracy: true, maximumAge: 0});
             }
 
+            mapState.on('change', function() {
+                $('h3').html('#map' + mapState.get('lon') + ' ' + mapState.get('lat'));
+            });
+
             this.model.on('change', function() {
                 var distance = distanceMeters(ths.model.toJSON(), mapState.toJSON());
                 //$('h3').html(distance + '#s' + (i++));
