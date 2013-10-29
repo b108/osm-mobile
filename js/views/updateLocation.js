@@ -14,7 +14,7 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem', 'func
                             lon: position.coords.longitude, lat: position.coords.latitude
                         });
                     }, 0);
-                });
+                }, function() {}, {enableHighAccuracy: true, maximumAge: 0});
             }
 
             this.model.on('change', function() {
