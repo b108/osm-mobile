@@ -17,6 +17,8 @@ define(['Backbone', 'jQuery', 'Leaflet', 'models/mapState', 'EventBroker'], func
             });
 
             map.on('moveend', function() {
+                if (state._update_from_change) return;
+
                 var latlon = map.getCenter();
 
                 state._update_from_map = true;
@@ -32,7 +34,9 @@ define(['Backbone', 'jQuery', 'Leaflet', 'models/mapState', 'EventBroker'], func
 
             state.on('change', function() {
                 if (!state._update_from_map) {
+                    state._update_from_change = true;
                     map.setView([state.get('lat'), state.get('lon')], state.get('z'));
+                    delete state._update_from_change;
                 }
             });
 
