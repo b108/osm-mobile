@@ -26,7 +26,7 @@ define(['Backbone', 'jQuery', 'Leaflet', 'models/mapStateItem', 'EventBroker', '
                 state._update_from_map = true;
 
                 state.set({
-                    lon: latlon.lon,
+                    lon: latlon.lng,
                     lat: latlon.lat,
                     z: map.getZoom()
                 });
