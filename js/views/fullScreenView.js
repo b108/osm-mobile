@@ -1,7 +1,7 @@
 define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], function(Backbone, $, detect, settings) {
     return Backbone.View.extend({
         events: {
-            'change #full-screen-switcher': 'fullScreenToggleHandler',
+            'slidestop #full-screen-switcher': 'fullScreenToggleHandler',
             'click .goFullScreen': 'goFullScreenClickHandler'
         },
         initialize: function() {
@@ -15,33 +15,30 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
 
             var ths = this;
 
-            this.$('#full-screen-switcher').bind(
-                'create', function() {
-                    ths.render();
-                }
-            );
-
             //if (settings.get('fullScreen')) this.goFullScreen();
+            //
+            alert('init');
         },
         render: function() {
             this.$('#full-screen-switcher').val( settings.get('fullScreen') ? 'on' : 'off' ).slider('refresh');
         },
         fullScreenToggleHandler: function(event) {
             var $select = $('#full-screen-switcher');
-            var value = $select.val();
+            var ths = this;
 
-            switch(value) {
-                case 'on':
-                    this.goFullScreen();
-                    break;
-                case 'off':
-                    this.exitFullScreen();
-                    break;
-            }
+            setTimeout(function() {
+                var value = $select.val();
 
-            settings.set('fullScreen', value == 'on');
-
-            return true;
+                switch(value) {
+                    case 'on':
+                        ths.goFullScreen();
+                        break;
+                    case 'off':
+                        ths.exitFullScreen();
+                        break;
+                }
+                settings.set('fullScreen', value == 'on');
+            }, 0)
         },
         goFullScreen: function() {
             detect.fullScreen( $('body')[0] );
