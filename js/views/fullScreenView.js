@@ -1,11 +1,11 @@
 define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], function(Backbone, $, detect, settings) {
     return Backbone.View.extend({
         events: {
-            'change #full-screen-switcher': 'fullScreenToggleHandler'
+            'change #full-screen-switcher': 'fullScreenToggleHandler',
+            'click .goFullScreen': 'goFullScreenClickHandler'
         },
         initialize: function() {
-            alert('!');
-            this.setElement( $('#full-screen-switcher').parent()[0] );
+            this.setElement( $('body')[0] );
 
             if (detect.hasFullScreenAPI($('body')[0])) {
                 $('body').addClass('has-fullscreen');
@@ -15,9 +15,11 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
 
             var ths = this;
 
-            setTimeout(function() {
-                ths.render();
-            }, 10);
+            this.$('#full-screen-switcher').bind(
+                'create', function() {
+                    ths.render();
+                }
+            );
 
             //if (settings.get('fullScreen')) this.goFullScreen();
         },
@@ -47,6 +49,11 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
         exitFullScreen: function() {
             detect.exitFullScreen()
             $('body').removeClass('fullScreen');
+        },
+        goFullScreenClickHandler: function(event) {
+            detect.fullScreen( $('html')[0] );
+
+            return false;
         }
     });
 });
