@@ -2,31 +2,33 @@ define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem',
     return Backbone.View.extend({
         my_layer: null,
         initialize: function() {
+            mapState.on('change', this.updateLayer, this);
+
+            this.updateLayer();
+        },
+        updateLayer: function() {
             var ths = this;
+            var map = leafletMapObject.getMap();
+            var mapBounds = map.getBounds();
 
-            mapState.on('change', function() {
-                var map = leafletMapObject.getMap();
-                var mapBounds = map.getBounds();
+            var requestData = request({
+                south: mapBounds.getSouth(),
+                north: mapBounds.getNorth(),
+                east: mapBounds.getEast(),
+                west: mapBounds.getWest()
+            });
 
-                var requestData = request({
-                    south: mapBounds.getSouth(),
-                    north: mapBounds.getNorth(),
-                    east: mapBounds.getEast(),
-                    west: mapBounds.getWest()
-                });
+            $.ajax({
+                type: 'POST',
+                url: 'http://overpass-api.de/api/interpreter',
+                data: requestData,
+                dataType: 'html',
+                success: function(xml) {
+                    var data = osm2geo(xml);
+                    //console.log(data);
 
-                $.ajax({
-                    type: 'POST',
-                    url: 'http://overpass-api.de/api/interpreter',
-                    data: requestData,
-                    dataType: 'html',
-                    success: function(xml) {
-                        var data = osm2geo(xml);
-                        //console.log(data);
-
-                        ths.render(data);
-                    }
-                });
+                    ths.render(data);
+                }
             });
         },
         render: function(data) {
@@ -34,7 +36,11 @@ define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem',
 
             if (this.my_layer) map.removeLayer(this.my_layer);
 
-            var layer = L.geoJson(data).addTo( map );
+            var layer = L.geoJson(data, {
+                onEachFeature: function(feature, layer) {
+                    console.log( feature );
+                }
+            }).addTo( map );
 
             this.my_layer = layer;
         }
