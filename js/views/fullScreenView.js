@@ -4,6 +4,7 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
             'change #full-screen-switcher': 'fullScreenToggleHandler'
         },
         initialize: function() {
+            alert('!');
             this.setElement( $('#full-screen-switcher').parent()[0] );
 
             if (detect.hasFullScreenAPI($('body')[0])) {
@@ -15,7 +16,7 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
             var ths = this;
 
             setTimeout(function() {
-                this.render();
+                ths.render();
             }, 10);
 
             //if (settings.get('fullScreen')) this.goFullScreen();
@@ -41,7 +42,7 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
             return true;
         },
         goFullScreen: function() {
-            detect.fullScreen( $('body').addClass('fullScreen')[0] );
+            detect.fullScreen( $('body')[0] );
         },
         exitFullScreen: function() {
             detect.exitFullScreen()
