@@ -14,7 +14,7 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
 
             this.render();
 
-            if (settings.get('fullScreen')) this.goFullScreen();
+            //if (settings.get('fullScreen')) this.goFullScreen();
         },
         render: function() {
             this.$('#full-screen-switcher').val( settings.get('fullScreen') ? 'on' : 'off' ).change();
