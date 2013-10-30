@@ -6,12 +6,16 @@
     padding: 0;
 }
 
-.goFullScreen {
+#goFullScreenBlock {
     display: none !important;
 }
 
-.has-fullscreen .goFullScreen {
-    display: inline-block !important;
+.has-fullscreen #goFullScreenBlock {
+    display: block !important;
+}
+
+.has-fullscreen.fullScreen #goFullScreenBlock {
+    display: none !important;
 }
 
 html, body {

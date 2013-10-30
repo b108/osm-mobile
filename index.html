@@ -12,6 +12,7 @@
   <!-- jQuery and jQuery Mobile -->
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    <script src="js/libs/jquery.fullscreen.js"></script>
 
   <!-- Leaflet -->
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
@@ -36,11 +37,9 @@
     <div data-theme="a" data-role="header">
         <h3>Options</h3>
     </div>
-    <label for="full-screen-switcher">Full Screen Mode:</label>
-    <select id="full-screen-switcher" data-role="slider" data-mini="true">
-        <option value="off" checked>Off</option>
-        <option value="on">On</option>
-    </select>
+    <div class="ui-grid-solo" id="goFullScreenBlock">
+        <div class="ui-block-a"><button class="goFullScreen" type="v" data-theme="a">Full Screen</button></div>
+    </div>
 </div>
 </body>
 </html>
