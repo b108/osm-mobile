@@ -37,6 +37,7 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
             return true;
         },
         goFullScreen: function() {
+            alert('go!');
             detect.fullScreen( $('html').addClass('fullScreen')[0] );
         },
         exitFullScreen: function() {
