@@ -12,7 +12,11 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
 
             //settings.on('change:fullScreen', this.render, this);
 
-            this.render();
+            var ths = this;
+
+            setTimeout(function() {
+                this.render();
+            }, 10);
 
             //if (settings.get('fullScreen')) this.goFullScreen();
         },
