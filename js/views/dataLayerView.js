@@ -1,22 +1,32 @@
 define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem', 'tpl!templates/request.xml', 'functions/osm2geo'], function(Backbone, L, leafletMapObject, mapState, request, osm2geo) {
     return Backbone.View.extend({
         my_layer: null,
+        my_selected_layer: null,
+        my_request_bounds: null,
         initialize: function() {
-            mapState.on('change', this.updateLayer, this);
+            mapState.on('change', this.updateLayerIfNeed, this);
 
-            this.updateLayer();
+            this.updateLayerIfNeed();
         },
-        updateLayer: function() {
+        updateLayerIfNeed: function() {
             var ths = this;
             var map = leafletMapObject.getMap();
             var mapBounds = map.getBounds();
 
+            if (this.my_request_bounds && this.my_request_bounds.contains( mapBounds )) {
+                return;
+            }
+
+            var requestBounds = mapBounds.pad(0.3);
+
             var requestData = request({
-                south: mapBounds.getSouth(),
-                north: mapBounds.getNorth(),
-                east: mapBounds.getEast(),
-                west: mapBounds.getWest()
+                south: requestBounds.getSouth(),
+                north: requestBounds.getNorth(),
+                east: requestBounds.getEast(),
+                west: requestBounds.getWest()
             });
+
+            this.my_request_bounds = requestBounds;
 
             $.ajax({
                 type: 'POST',
@@ -33,12 +43,22 @@ define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem',
         },
         render: function(data) {
             var map = leafletMapObject.getMap();
+            var ths = this;
 
             if (this.my_layer) map.removeLayer(this.my_layer);
 
             var layer = L.geoJson(data, {
                 onEachFeature: function(feature, layer) {
-                    console.log( feature );
+                    layer.on('click', function(e) {
+                        if (ths.my_selected_layer) {
+                            ths.my_selected_layer.setStyle( ths.my_selected_layer.originalStyle );
+                        }
+                        layer.originalStyle = layer.options;
+
+                        layer.setStyle({color: '#0000ff', weight: 8});
+
+                        ths.my_selected_layer = layer;
+                    });
                 }
             }).addTo( map );
 
