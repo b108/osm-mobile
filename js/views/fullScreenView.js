@@ -27,8 +27,6 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
             var $select = $('#full-screen-switcher');
             var value = $select.val();
 
-            alert(value);
-
             switch(value) {
                 case 'on':
                     this.goFullScreen();
@@ -43,12 +41,11 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
             return true;
         },
         goFullScreen: function() {
-            alert('go!');
-            detect.fullScreen( $('html').addClass('fullScreen')[0] );
+            detect.fullScreen( $('body').addClass('fullScreen')[0] );
         },
         exitFullScreen: function() {
             detect.exitFullScreen()
-            $('html').removeClass('fullScreen');
+            $('body').removeClass('fullScreen');
         }
     });
 });
