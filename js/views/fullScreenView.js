@@ -20,9 +20,8 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
             this.$('#full-screen-switcher').val( settings.get('fullScreen') ? 'on' : 'off' ).slider('refresh');
         },
         fullScreenToggleHandler: function(event) {
-            var $select = $(event.target);
+            var $select = $('#full-screen-switcher');
             var value = $select.val();
-            alert('toggle! ' + value);
 
             switch(value) {
                 case 'on':
