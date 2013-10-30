@@ -36,9 +36,11 @@
     <div data-theme="a" data-role="header">
         <h3>Options</h3>
     </div>
-    <div data-role="content">
-        <a href="#" class="ui-btn-right goFullScreen" data-role="button" data-icon="grid" data-theme="a">Full Screen</a>
-    </div>
+    <label for="full-screen-switcher">Full Screen Mode:</label>
+    <select id="full-screen-switcher" data-role="slider" data-mini="true">
+        <option value="off" checked>Off</option>
+        <option value="on">On</option>
+    </select>
 </div>
 </body>
 </html>

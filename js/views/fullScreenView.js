@@ -1,24 +1,47 @@
-define(['Backbone', 'jQuery', 'detect/fullScreen'], function(Backbone, $, detect) {
+define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], function(Backbone, $, detect, settings) {
     return Backbone.View.extend({
         events: {
-            'click .goFullScreen': 'goFullScreenClickHandler'
+            'change #full-screen-switcher': 'fullScreenToggleHandler'
         },
         initialize: function() {
-            this.setElement( $('body')[0] );
+            this.setElement( $('#full-screen-switcher').parent()[0] );
 
-            if (detect.hasFullScreenAPI(this.el)) {
-                this.$el.addClass('has-fullscreen');
+            if (detect.hasFullScreenAPI($('body')[0])) {
+                $('body').addClass('has-fullscreen');
             }
+
+            //settings.on('change:fullScreen', this.render, this);
+
+            this.render();
+
+            if (settings.get('fullScreen')) this.goFullScreen();
         },
-        goFullScreenClickHandler: function(event) {
-            detect.fullScreen( $('html')[0] );
+        render: function() {
+            this.$('#full-screen-switcher').val( settings.get('fullScreen') ? 'on' : 'off' ).change();
+        },
+        fullScreenToggleHandler: function(event) {
+            var $select = $(event.target);
+            var value = $select.val();
 
-            setInterval(function() {
-                $(window).resize();
-            }, 1000);
+            switch(value) {
+                case 'on':
+                    this.goFullScreen();
+                    break;
+                case 'off':
+                    this.exitFullScreen();
+                    break;
+            }
 
-            return false;
+            settings.set('fullScreen', value == 'on');
+
+            return true;
+        },
+        goFullScreen: function() {
+            detect.fullScreen( $('html').addClass('fullScreen')[0] );
+        },
+        exitFullScreen: function() {
+            detect.exitFullScreen()
+            $('html').removeClass('fullScreen');
         }
     });
 });
-
