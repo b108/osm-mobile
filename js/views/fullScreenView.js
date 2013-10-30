@@ -23,6 +23,8 @@ define(['Backbone', 'jQuery', 'detect/fullScreen', 'models/settingsItem'], funct
             var $select = $('#full-screen-switcher');
             var value = $select.val();
 
+            alert(value);
+
             switch(value) {
                 case 'on':
                     this.goFullScreen();
