@@ -17,6 +17,13 @@ define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem',
                 return;
             }
 
+            var point = mapBounds.getSouthWest();
+
+            var a_meters = point.distanceTo([mapBounds.getSouth(), mapBounds.getEast()]);
+            var b_meters = point.distanceTo([mapBounds.getNorth(), mapBounds.getWest()]);
+
+            if ((a_meters * b_meters) > 500 * 400 * 2) return;
+
             var requestBounds = mapBounds.pad(0.3);
 
             var requestData = request({
