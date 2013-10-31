@@ -1,4 +1,4 @@
-define(['views/mapView', 'views/fullScreenView', 'views/updateLocation', 'views/currentPositionMarkerView', 'views/baseLayerView', 'views/dataLayerView'], function(MapView, FullScreenView, UpdateLocationView, CurrentPositionMarker, BaseLayerView, DataLayerView) {
+define(['views/mapView', 'views/fullScreenView', 'views/updateLocation', 'views/currentPositionMarkerView', 'views/baseLayerView', 'views/dataLayerView', /*'views/messageView'*/], function(MapView, FullScreenView, UpdateLocationView, CurrentPositionMarker, BaseLayerView, DataLayerView/*, MessagesView*/) {
     var initialize = function() {
         new MapView();
         new BaseLayerView();
@@ -8,6 +8,8 @@ define(['views/mapView', 'views/fullScreenView', 'views/updateLocation', 'views/
         new FullScreenView();
         new UpdateLocationView();
         new CurrentPositionMarker();
+
+        //new MessagesView();
     };
 
     return {

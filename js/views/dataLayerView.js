@@ -1,10 +1,14 @@
-define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem', 'tpl!templates/request.xml', 'functions/osm2geo'], function(Backbone, L, leafletMapObject, mapState, request, osm2geo) {
+define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem', 'tpl!templates/request.xml', 'functions/osm2geo', 'EventBroker'], function(Backbone, L, leafletMapObject, mapState, request, osm2geo, EventBroker) {
     return Backbone.View.extend({
         my_layer: null,
         my_selected_layer: null,
         my_request_bounds: null,
         initialize: function() {
             mapState.on('change', this.updateLayerIfNeed, this);
+
+            setTimeout(function() {
+                EventBroker.trigger('ui:showMessage', '!ggg');
+            }, 1110);
 
             this.updateLayerIfNeed();
         },

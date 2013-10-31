@@ -18,8 +18,15 @@
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
   <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
 
-  <script type="text/javascript" src="js/compressed/app-built.js"></script>
   <link rel="stylesheet" href="css/main.css" />
+
+  <script type="text/javascript">
+      if ((window.location + '').match(/debug/)) {
+          document.write('<script data-main="js/main.js" src="' + 'js/libs/require.js' + '" type="text/javascript"></' + 'script>');
+      } else {
+          document.write('<script src="' + 'js/compressed/app-built.js' + '" type="text/javascript"></' + 'script>');
+      }
+  </script>
 </head>
 <body>
 <!-- Home -->
