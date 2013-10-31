@@ -36,5 +36,5 @@ require([
     'app',
     'jQuery'
 ], function(App, $) {
-    $(App.initialize);
+    $(document).ready(App.initialize);
 });

@@ -1,7 +1,8 @@
 define(['Backbone', 'jQuery'], function(Backbone, $) {
     var settings = new(Backbone.Model.extend({
         defaults: {
-            fullScreen: false
+            fullScreen: false,
+            base_layer_url: 'http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
         },
         initialize: function() {
         },
@@ -19,4 +20,3 @@ define(['Backbone', 'jQuery'], function(Backbone, $) {
 
     return settings;
 });
-

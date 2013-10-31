@@ -8,18 +8,17 @@
   <title>OSM mobile</title>
   
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+  <link rel="stylesheet" href="css/main.css" />
   
   <!-- jQuery and jQuery Mobile -->
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
     <script src="js/libs/jquery.fullscreen.js"></script>
 
   <!-- Leaflet -->
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
   <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
 
-  <link rel="stylesheet" href="css/main.css" />
-
+  <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
   <script type="text/javascript">
       if ((window.location + '').match(/debug/)) {
           document.write('<script data-main="js/main.js" src="' + 'js/libs/require.js' + '" type="text/javascript"></' + 'script>');
@@ -34,18 +33,26 @@
     <div data-theme="a" data-role="header">
         <h3>OSM mobile</h3>
         <!--<a href="#" class="ui-btn-right goFullScreen" data-role="button" data-icon="grid" data-theme="a">Full Screen</a>-->
-        <a href="#options" class="ui-btn-right" data-icon="gear">&nbsp;</a>
+        <a href="#settings-page" class="ui-btn-right" data-transition="slide" data-icon="gear">&nbsp;</a>
     </div>
     <div data-role="content">
         <div id="map"></div>
     </div>
 </div>
-<div data-role="page" id="options" data-add-back-btn="true">
+<div data-role="page" id="settings-page" data-add-back-btn="true">
     <div data-theme="a" data-role="header">
         <h3>Options</h3>
     </div>
     <div class="ui-grid-solo" id="goFullScreenBlock">
         <div class="ui-block-a"><button class="goFullScreen" type="v" data-theme="a">Full Screen</button></div>
+    </div>
+
+    <div data-role="fieldcontain">
+        <label for="base_layer_url">Base Layer:</label>
+        <select id="base_layer_url">
+            <option value="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png">Mapnik</option>
+            <option value="http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png">HOT</option>
+        </select>
     </div>
 </div>
 </body>
