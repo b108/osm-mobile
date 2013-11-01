@@ -5,7 +5,8 @@ define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem',
         color: '#000',
         weight: 1,
         opacity: 0.5,
-        fillOpacity: 0.5
+        fillOpacity: 0.5,
+        clickable: false
     };
 
     return Backbone.View.extend({
