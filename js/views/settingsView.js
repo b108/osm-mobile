@@ -10,6 +10,9 @@ define(['Backbone', 'jQuery', 'models/settingsItem', 'models/changesCollectionIt
             this.model.on('change', this.render, this);
             changesCollection.on('all', this.render, this);
 
+            0 && changesCollection.on('savedSimple', function() {
+            }, this);
+
             this.render();
         },
         render: function() {

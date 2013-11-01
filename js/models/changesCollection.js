@@ -21,11 +21,16 @@ define(['Backbone', 'models/change', 'jQuery'], function(Backbone, ChangeModel, 
 
                     var index = 0;
 
+                    var successCount = 0;
+
                     var saveNext = function() {
                         setTimeout(function() {
                             var change = ths.at(index);
 
-                            if (!change) return;
+                            if (!change) {
+                                if (successCount) this.trigger('savedSimple');
+                                return;
+                            }
 
                             $.ajax({
                                 url: ths.osm_read_server + '/api/0.6/' + change.getOsmType() + '/' + change.getOsmIdInt(),
@@ -72,6 +77,7 @@ define(['Backbone', 'models/change', 'jQuery'], function(Backbone, ChangeModel, 
                                             data: '<osmChange version="0.3" generator="Osmosis">' + '<modify>' + $element_xml.html() + '</modify>' + '</osmChange>',
                                             success: function() {
                                                 ths.remove( change );
+                                                successCount++;
                                                 saveNext();
                                             },
                                             error: function() {
