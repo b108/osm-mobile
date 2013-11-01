@@ -41,10 +41,16 @@ define([], function() {
         // Function to set props for a feature
         function setProps(element){
             var properties = {};
-            var tags = $(element).find("tag");
+            var $element = $(element);
+            var tags = $element.find("tag");
             tags.each(function(index, tag){
                 properties[$(tag).attr("k")] = $(tag).attr("v");
             });
+
+            if (element.tagName == 'WAY' && $element.attr('id') && $element.attr('version')) {
+                properties['osm:id'] = 'way:' + $element.attr('id') + ':' + $element.attr('version');
+            }
+
             return properties;
         }
         // Generic function to create a feature of given type

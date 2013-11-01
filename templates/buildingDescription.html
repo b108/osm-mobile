@@ -1,0 +1,6 @@
+<% _.chain( feature.properties ).keys().each(function(prop) {
+    if (prop == 'osm:id') return;
+    print('<p>');
+    print('<b>' + prop + '</b>: <i>' + feature.properties[prop] + '</i>');
+    print('</p>');
+}); %>

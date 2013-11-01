@@ -54,6 +54,56 @@
             <option value="http://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png">HOT</option>
         </select>
     </div>
+
+    <div id="saveBlock">
+        <p>Changes number: <em></em></p>
+        <div data-role="fieldcontain">
+            <label for="osm_login">OSM Login:</label>
+            <input id="osm_login" value="" />
+        </div>
+        <div data-role="fieldcontain">
+            <label for="osm_password">OSM Password:</label>
+            <input id="osm_password" type="password" value="" />
+        </div>
+        <div class="ui-grid-solo">
+            <div class="ui-block-a"><button id="goSaveToServer" type="v" data-theme="a">SaveChanges</button></div>
+        </div>
+    </div>
+
+</div>
+<div data-role="page" id="feature-page" data-add-back-btn="true">
+    <div data-theme="a" data-role="header">
+        <h3>Feature Page</h3>
+    </div>
+    <div id="feature-page-content">
+        <div class="buildingDescription"></div>
+        <div data-role="fieldcontain">
+            <label for="buildingLevels">Levels:</label>
+            <select id="buildingLevels" data-native-menu="false">
+                <option value="">-</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div data-role="fieldcontain">
+            <label for="buildingType">Building Type:</label>
+            <select id="buildingType" data-native-menu="false">
+                <option value="yes">Just a building</option>
+                <option value="industrial">Industrial</option>
+                <option value="garage">Garage</option>
+                <option value="garages">Garages</option>
+                <option value="house">House</option>
+                <option value="apartments">Apartments</option>
+                <option value="kitchen">Kitchen</option>
+                <option value="warehouse">Warehouse</option>
+                <option value="church">Church</option>
+                <option value="commercial">Commercial</option>
+            </select>
+        </div>
+    </div>
 </div>
 </body>
 </html>

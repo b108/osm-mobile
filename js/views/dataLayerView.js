@@ -66,6 +66,10 @@ define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem',
                         }
                         layer.originalStyle = layer.options;
 
+                        setTimeout(function() {
+                            EventBroker.trigger('map:featureSelect', feature, layer);
+                        }, 0);
+
                         layer.setStyle({color: '#0000ff', weight: 8});
 
                         ths.my_selected_layer = layer;
@@ -77,4 +81,3 @@ define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem',
         }
     });
 });
-
