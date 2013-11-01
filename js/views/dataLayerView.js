@@ -1,4 +1,13 @@
 define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem', 'tpl!templates/request.xml', 'functions/osm2geo', 'EventBroker'], function(Backbone, L, leafletMapObject, mapState, request, osm2geo, EventBroker) {
+    var geojsonMarkerOptions = {
+        radius: 2,
+        fillColor: '#ff7800',
+        color: '#000',
+        weight: 1,
+        opacity: 0.5,
+        fillOpacity: 0.5
+    };
+
     return Backbone.View.extend({
         my_layer: null,
         my_selected_layer: null,
@@ -6,9 +15,11 @@ define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem',
         initialize: function() {
             mapState.on('change', this.updateLayerIfNeed, this);
 
+            /*
             setTimeout(function() {
                 EventBroker.trigger('ui:showMessage', '!ggg');
             }, 1110);
+            */
 
             this.updateLayerIfNeed();
         },
@@ -74,6 +85,9 @@ define(['Backbone', 'Leaflet', 'models/leafletMapObject', 'models/mapStateItem',
 
                         ths.my_selected_layer = layer;
                     });
+                },
+                pointToLayer: function(feature, latlng) {
+                    return L.circleMarker(latlng, geojsonMarkerOptions);
                 }
             }).addTo( map );
 
