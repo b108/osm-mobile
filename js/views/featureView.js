@@ -7,7 +7,8 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/change', 'models/changesCol
         collection: changesCollection,
         events: {
             'change #buildingLevels': 'buildingLevelsChangeHandler',
-            'change #buildingType': 'buildingTypeChangeHandler'
+            'change #buildingType': 'buildingTypeChangeHandler',
+            'change #houseNumber': 'houseNumberChangeHandler'
         },
         initialize: function() {
             EventBroker.register(this);
@@ -22,6 +23,8 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/change', 'models/changesCol
 
             this.$('#buildingLevels').val( this.getProperty('building:levels') || '' ).change();
             this.$('#buildingType').val( this.getProperty('building') || '' ).change();
+
+            this.$('#houseNumber').val( this.getProperty('addr:housenumber') ).change();
 
             delete this._rendering;
         },
@@ -55,9 +58,7 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/change', 'models/changesCol
 
             $.mobile.changePage('#feature-page', {transition: 'slide'});
         },
-        selectChangeHandler: function(e, tagName) {
-            if (this._rendering) return;
-
+        setChange: function(tagName, value) {
             var changeId = this.getFeatureId();
             var isNewChange = false;
 
@@ -70,19 +71,29 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/change', 'models/changesCol
                     return newChange;
             })();
 
-            var value = $(e.target).val();
-
             change.setProperty(tagName, value == "" ? null : value);
 
             if (isNewChange) {
                 this.collection.add( change );
             }
         },
+        selectChangeHandler: function(e, tagName) {
+            if (this._rendering) return;
+
+            var value = $(e.target).val();
+            this.setChange(tagName, value);
+        },
         buildingLevelsChangeHandler: function(e) {
             this.selectChangeHandler(e, 'building:levels');
         },
         buildingTypeChangeHandler: function(e) {
             this.selectChangeHandler(e, 'building');
+        },
+        houseNumberChangeHandler: function(e) {
+            if (this._rendering) return;
+
+            var value = $(e.target).val();
+            this.setChange('addr:housenumber', value);
         }
     });
 });

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm-script>
     <union>
+        <!-- buildings without building type -->
         <query type="way">
             <has-kv k="building" v="yes" />
             <bbox-query s="<%= south %>" w="<%= west %>" n="<%= north %>" e="<%= east %>"/>
         </query>
+        <!-- buildings without building levels -->
         <query type="way">
             <has-kv k="building" />
             <has-kv k="building:levels" modv="not" regv="[0-9]" />
+            <bbox-query s="<%= south %>" w="<%= west %>" n="<%= north %>" e="<%= east %>"/>
+        </query>
+        <!-- houses without address number -->
+        <query type="way">
+            <has-kv k="building" v="house" />
+            <has-kv k="addr:housenumber" modv="not" regv="[0-9]" />
             <bbox-query s="<%= south %>" w="<%= west %>" n="<%= north %>" e="<%= east %>"/>
         </query>
     </union>
