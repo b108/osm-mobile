@@ -1,4 +1,4 @@
-define(['Backbone', 'jQuery', 'EventBroker', 'models/change', 'models/changesCollectionItem', 'tpl!templates/buildingDescription.html', 'Underscore'], function(Backbone, $, EventBroker, ChangeModel, changesCollection, buildingDescription, _) {
+define(['Backbone', 'jQuery', 'EventBroker', 'models/change', 'models/changesCollectionItem', 'tpl!templates/buildingDescription.html', 'Underscore', 'models/settingsItem'], function(Backbone, $, EventBroker, ChangeModel, changesCollection, buildingDescription, _, settings) {
     return Backbone.View.extend({
         interests: {
             'map:featureSelect': 'mapSelectFeatureSignalHandler'
@@ -82,6 +82,8 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/change', 'models/changesCol
 
             var value = $(e.target).val();
             this.setChange(tagName, value);
+
+            this.allUserChangesHanler();
         },
         buildingLevelsChangeHandler: function(e) {
             this.selectChangeHandler(e, 'building:levels');
@@ -94,6 +96,18 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/change', 'models/changesCol
 
             var value = $(e.target).val();
             this.setChange('addr:housenumber', value);
+
+            this.allUserChangesHanler();
+        },
+        allUserChangesHanler: function(e) {
+            if (this._rendering) return;
+
+            if (settings.get('auto_close_feature_page')
+                && this.getProperty('addr:housenumber')
+                && this.getProperty('building:levels')
+                && this.getProperty('building') != 'yes') {
+                    $.mobile.changePage('#map-page', {transition: 'slide'});
+            }
         }
     });
 });
