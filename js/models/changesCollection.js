@@ -106,6 +106,15 @@ define(['Backbone', 'models/change', 'jQuery'], function(Backbone, ChangeModel, 
                 },
                 data: '<osm><changeset>' + '<tag k="created_by" v="OSM Mobile" />' + '<tag k="comment" v="building changes" />' + '</changeset></osm>'
             });
+        },
+        save: function() {
+            (window.localStorage || {}).changes = JSON.stringify( this.toJSON() );
+        },
+        fetch: function() {
+            var changes = (window.localStorage || {}).changes;
+            if (changes) {
+                this.add( JSON.parse(changes) );
+            }
         }
     });
 });
