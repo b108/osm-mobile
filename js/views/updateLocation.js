@@ -18,7 +18,9 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/currentPositionItem', 'func
                 var distance = distanceMeters(ths.model.toJSON(), mapState.toJSON());
                 if (distance > 20) {
                     var newPosition = ths.model.toJSON();
-                    newPosition.z = 18;
+                    if (mapState.get('z') < 17) {
+                        newPosition.z = 17;
+                    }
                     EventBroker.trigger('map:setCenter', newPosition);
                 }
             });
