@@ -17,7 +17,7 @@ define(['Backbone', 'jQuery', 'Leaflet', 'models/mapStateItem', 'EventBroker', '
             var map = L.map('map', {
                 center: [state.get('lat'), state.get('lon')], // Leningrad
                 zoom: state.get('z'),
-                maxZoom: 19
+                maxZoom: 18
             });
 
             leafletMapObject.setMap(map);
