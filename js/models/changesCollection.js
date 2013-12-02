@@ -9,6 +9,7 @@ define(['Backbone', 'models/change', 'jQuery'], function(Backbone, ChangeModel, 
             if (!this.length) return false;
 
             var ths = this;
+            this.trigger('saveStart');
 
             $.ajax({
                 beforeSend: function(xhr) {
@@ -100,9 +101,8 @@ define(['Backbone', 'models/change', 'jQuery'], function(Backbone, ChangeModel, 
 
                     saveNext();
                 },
-                error: function(errorString) {
-                    //console.log('Error! ', arguments);
-                    alert(errorString);
+                error: function(error) {
+                    alert('OSM Server: ' + (error.responseText || error));
                 },
                 data: '<osm><changeset>' + '<tag k="created_by" v="OSM Mobile" />' + '<tag k="comment" v="building changes" />' + '</changeset></osm>'
             });
