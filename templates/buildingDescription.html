@@ -1,6 +1,8 @@
 <% _.chain( feature.properties ).keys().each(function(prop) {
     if (prop == 'osm:id') return;
-    print('<p>');
-    print('<b>' + prop + '</b>: <i>' + feature.properties[prop] + '</i>');
-    print('</p>');
+    var originValue = feature.properties[prop];
+    var newValue = getCurrentProperty(prop);
+    %>
+        <p><b><%- prop %></b>: <% if (originValue != newValue) { %><s><%- originValue %></s> → <% } %><i><%- newValue %></i></p>
+    <%
 }); %>
