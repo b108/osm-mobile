@@ -17,8 +17,7 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/change', 'models/changesCol
             this._rendering = true;
 
             this.$('.buildingDescription').html( buildingDescription({
-                feature: this.my_feature,
-                _: _
+                feature: this.my_feature
             }) );
 
             this.$('#buildingLevels').val( this.getProperty('building:levels') || '' ).change();
@@ -106,7 +105,9 @@ define(['Backbone', 'jQuery', 'EventBroker', 'models/change', 'models/changesCol
                 && this.getProperty('addr:housenumber')
                 && this.getProperty('building:levels')
                 && this.getProperty('building') != 'yes') {
-                    $.mobile.changePage('#map-page', {transition: 'slide'});
+                    setTimeout(function() {
+                        $.mobile.changePage('#map-page', {transition: 'slide'});
+                    }, 10);
             }
         }
     });
